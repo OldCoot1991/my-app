@@ -1,41 +1,51 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
+import { useFavoritesStore } from "@/store/favoritesStore";
 
 const TAB_ITEMS = [
-  { id: "home", label: "Главная", icon: "🏠" },
-  { id: "catalog", label: "Каталог", icon: "🗂" },
-  { id: "cart", label: "Корзина", icon: "🛒", badge: 2 },
-  { id: "profile", label: "Профиль", icon: "👤" },
+  { id: "home", label: "Главная", icon: "🏠", href: "/" },
+  { id: "catalog", label: "Каталог", icon: "🗂", href: "/catalog" },
+  { id: "favorites", label: "Избранное", icon: "♡", href: "/favorites" },
+  { id: "profile", label: "Профиль", icon: "👤", href: "/profile" },
 ] as const;
 
 type TabId = (typeof TAB_ITEMS)[number]["id"];
 
 interface BottomTabBarProps {
   active: TabId;
-  onPress?: (tabId: TabId) => void;
 }
 
-export function BottomTabBar({ active, onPress }: BottomTabBarProps) {
+export function BottomTabBar({ active }: BottomTabBarProps) {
+  const router = useRouter();
+  const favCount = useFavoritesStore((s) => s.count());
+
   return (
     <View style={styles.tabBar}>
       {TAB_ITEMS.map((tab) => {
         const isActive = tab.id === active;
+        const showBadge = tab.id === "favorites" && favCount > 0;
+
         return (
           <TouchableOpacity
             key={tab.id}
             style={styles.tabItem}
             activeOpacity={0.7}
-            onPress={() => onPress?.(tab.id)}
+            onPress={() => router.push(tab.href as any)}
           >
             <View style={styles.iconWrapper}>
-              <Text style={styles.icon}>{tab.icon}</Text>
-              {"badge" in tab && tab.badge ? (
+              <Text style={[styles.icon, isActive && styles.iconActive]}>
+                {tab.id === "favorites" && isActive ? "❤️" : tab.icon}
+              </Text>
+              {showBadge && (
                 <View style={styles.badge}>
-                  <Text style={styles.badgeText}>{tab.badge}</Text>
+                  <Text style={styles.badgeText}>{favCount}</Text>
                 </View>
-              ) : null}
+              )}
             </View>
-            <Text style={[styles.label, isActive && styles.labelActive]}>{tab.label}</Text>
+            <Text style={[styles.label, isActive && styles.labelActive]}>
+              {tab.label}
+            </Text>
             {isActive && <View style={styles.activeLine} />}
           </TouchableOpacity>
         );
@@ -68,11 +78,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   icon: { fontSize: 22 },
+  iconActive: { fontSize: 22 },
   badge: {
     position: "absolute",
     top: 0,
     right: 0,
-    backgroundColor: Colors.text,
+    backgroundColor: "#EF4444",
     borderRadius: 8,
     minWidth: 16,
     height: 16,

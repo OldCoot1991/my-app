@@ -14,10 +14,13 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { getProductById } from "@/constants/data";
 import { StarRating } from "@/components/StarRating";
+import { useFavoritesStore } from "@/store/favoritesStore";
 
 export default function ProductScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
+  const isFav = useFavoritesStore((s) => s.isFavorite(id || ""));
+  const toggle = useFavoritesStore((s) => s.toggle);
 
   const product = getProductById(id);
 
@@ -45,8 +48,13 @@ export default function ProductScreen() {
           <Text style={styles.headerBackText}>Назад</Text>
         </TouchableOpacity>
         <View style={styles.headerActions}>
-          <TouchableOpacity style={styles.headerActionBtn}>
-            <Text style={styles.headerActionIcon}>♡</Text>
+          <TouchableOpacity 
+            style={styles.headerActionBtn} 
+            onPress={() => toggle(id || "")}
+          >
+            <Text style={[styles.headerActionIcon, isFav && styles.headerActionIconActive]}>
+              {isFav ? "❤️" : "♡"}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.headerActionBtn}>
             <Text style={styles.headerActionIcon}>⤴</Text>
@@ -187,7 +195,8 @@ const styles = StyleSheet.create({
     width: 40, height: 40, borderRadius: 20,
     backgroundColor: Colors.badgeBg, alignItems: "center", justifyContent: "center",
   },
-  headerActionIcon: { fontSize: 18 },
+  headerActionIcon: { fontSize: 18, color: Colors.text },
+  headerActionIconActive: { color: "#EF4444" },
 
   // IMAGE
   imageWrapper: { width: "100%", height: 320, backgroundColor: Colors.badgeBg, position: "relative" },

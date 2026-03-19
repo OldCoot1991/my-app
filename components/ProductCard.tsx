@@ -10,6 +10,7 @@ import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { Product } from "@/constants/data";
 import { StarRating } from "@/components/StarRating";
+import { useFavoritesStore } from "@/store/favoritesStore";
 
 interface ProductCardProps {
   item: Product;
@@ -17,6 +18,9 @@ interface ProductCardProps {
 
 export function ProductCard({ item }: ProductCardProps) {
   const router = useRouter();
+  const isFav = useFavoritesStore((s) => s.isFavorite(item.id));
+  const toggle = useFavoritesStore((s) => s.toggle);
+
   return (
     <TouchableOpacity
       style={styles.card}
@@ -36,8 +40,14 @@ export function ProductCard({ item }: ProductCardProps) {
             <Text style={styles.outOfStockText}>Нет в наличии</Text>
           </View>
         )}
-        <TouchableOpacity style={styles.wishlistBtn} activeOpacity={0.8}>
-          <Text style={styles.wishlistIcon}>♡</Text>
+        <TouchableOpacity
+          style={styles.wishlistBtn}
+          activeOpacity={0.75}
+          onPress={() => toggle(item.id)}
+        >
+          <Text style={[styles.wishlistIcon, isFav && styles.wishlistIconActive]}>
+            {isFav ? "❤️" : "♡"}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -119,6 +129,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   wishlistIcon: { fontSize: 18, color: Colors.textSecondary },
+  wishlistIconActive: { color: "#EF4444" },
   info: { padding: 16 },
   topRow: {
     flexDirection: "row",
