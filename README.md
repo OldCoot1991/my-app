@@ -2,6 +2,11 @@
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+## Prerequisites
+
+- **Node.js**: `v20.0.0` or later (currently tested on `v24.13.1`)
+- **npm**: `v10.0.0` or later (currently tested on `v11.8.0`)
+
 ## Get started
 
 1. Install dependencies

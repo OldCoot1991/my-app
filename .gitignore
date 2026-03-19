@@ -41,3 +41,6 @@ app-example
 # generated native folders
 /ios
 /android
+
+# site source (reference only, not for production)
+src copy site/
