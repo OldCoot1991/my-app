@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
-  SafeAreaView,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { PRODUCTS } from "@/constants/data";

@@ -4,13 +4,13 @@ import { Colors } from "@/constants/Colors";
 import { useFavoritesStore } from "@/store/favoritesStore";
 
 const TAB_ITEMS = [
-  { id: "home", label: "Главная", icon: "🏠", href: "/" },
   { id: "catalog", label: "Каталог", icon: "🗂", href: "/catalog" },
+  { id: "cart", label: "Корзина", icon: "🛒", href: "/cart" },
   { id: "favorites", label: "Избранное", icon: "♡", href: "/favorites" },
-  { id: "profile", label: "Профиль", icon: "👤", href: "/profile" },
+  { id: "profile", label: "Профиль", icon: "👤", href: "/auth" },
 ] as const;
 
-type TabId = (typeof TAB_ITEMS)[number]["id"];
+type TabId = (typeof TAB_ITEMS)[number]["id"] | "home";
 
 interface BottomTabBarProps {
   active: TabId;

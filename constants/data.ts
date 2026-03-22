@@ -12,6 +12,7 @@ export interface Product {
   inStock: boolean;
   features: string[];
   image: string;
+  images?: string[];
 }
 
 // ─── CATEGORY TYPE ─────────────────────────────────────────────────────────
@@ -57,6 +58,10 @@ export const PRODUCTS: Product[] = [
     ],
     image:
       "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+    images: [
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&q=80&w=800",
+    ],
   },
   {
     id: "2",
@@ -81,6 +86,10 @@ export const PRODUCTS: Product[] = [
     ],
     image:
       "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&q=80&w=800",
+    images: [
+      "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1592840062464-79faec3e0856?auto=format&fit=crop&q=80&w=800",
+    ],
   },
   {
     id: "3",
@@ -104,6 +113,10 @@ export const PRODUCTS: Product[] = [
     ],
     image:
       "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&q=80&w=800",
+    images: [
+      "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800",
+    ],
   },
   {
     id: "4",
@@ -128,6 +141,10 @@ export const PRODUCTS: Product[] = [
     ],
     image:
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800",
+    images: [
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1531525645387-7f14be1bfc3d?auto=format&fit=crop&q=80&w=800",
+    ],
   },
   {
     id: "5",
@@ -152,6 +169,10 @@ export const PRODUCTS: Product[] = [
     ],
     image:
       "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=800",
+    images: [
+      "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&q=80&w=800",
+    ],
   },
   {
     id: "6",
@@ -176,6 +197,10 @@ export const PRODUCTS: Product[] = [
     ],
     image:
       "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=800",
+    images: [
+      "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1551609355-667cb3d4b655?auto=format&fit=crop&q=80&w=800",
+    ],
   },
 ];
 

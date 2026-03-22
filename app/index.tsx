@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
-  SafeAreaView,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
 
 import { Colors } from "@/constants/Colors";
@@ -126,12 +126,12 @@ const styles = StyleSheet.create({
   scrollContent: { paddingBottom: 32 },
 
   // HERO
-  hero: { height: 480, justifyContent: "flex-end", overflow: "hidden" },
+  hero: { height: 350, justifyContent: "flex-end", overflow: "hidden" },
   heroOverlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(9,9,11,0.65)",
   },
-  heroContent: { padding: 24, paddingBottom: 36 },
+  heroContent: { padding: 20, paddingBottom: 24 },
   heroBadge: {
     flexDirection: "row",
     alignItems: "center",
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
     alignSelf: "flex-start",
-    marginBottom: 16,
+    marginBottom: 12,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.2)",
   },
@@ -148,14 +148,14 @@ const styles = StyleSheet.create({
     width: 8, height: 8, borderRadius: 4,
     backgroundColor: Colors.accent, marginRight: 8,
   },
-  heroBadgeText: { color: Colors.white, fontSize: 13, fontWeight: "500" },
+  heroBadgeText: { color: Colors.white, fontSize: 12, fontWeight: "500" },
   heroTitle: {
-    fontSize: 42, fontWeight: "800", color: Colors.white,
-    letterSpacing: -1, lineHeight: 50, marginBottom: 12,
+    fontSize: 34, fontWeight: "800", color: Colors.white,
+    letterSpacing: -1, lineHeight: 38, marginBottom: 8,
   },
   heroTitleAccent: { color: "#A1A1AA" },
   heroSubtitle: {
-    fontSize: 15, color: "#A1A1AA", lineHeight: 22, marginBottom: 24, maxWidth: 320,
+    fontSize: 14, color: "#A1A1AA", lineHeight: 20, marginBottom: 16, maxWidth: 320,
   },
   heroButtons: { flexDirection: "row", gap: 12 },
   heroBtnPrimary: {
@@ -185,17 +185,17 @@ const styles = StyleSheet.create({
   sectionLink: { fontSize: 14, fontWeight: "600", color: Colors.text, paddingTop: 4 },
 
   // PROMO
-  promo: { height: 440, justifyContent: "flex-end", overflow: "hidden" },
+  promo: { height: 320, justifyContent: "flex-end", overflow: "hidden" },
   promoOverlay: {
     ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(9,9,11,0.78)",
   },
-  promoContent: { padding: 24, paddingBottom: 40 },
+  promoContent: { padding: 20, paddingBottom: 24 },
   promoTitle: {
-    fontSize: 38, fontWeight: "800", color: Colors.white,
-    letterSpacing: -1, lineHeight: 46, marginBottom: 12,
+    fontSize: 30, fontWeight: "800", color: Colors.white,
+    letterSpacing: -1, lineHeight: 36, marginBottom: 8,
   },
   promoTitleAccent: { color: Colors.accent },
-  promoSubtitle: { fontSize: 14, color: "#A1A1AA", lineHeight: 22, marginBottom: 24 },
+  promoSubtitle: { fontSize: 13, color: "#A1A1AA", lineHeight: 20, marginBottom: 16 },
   promoBtn: {
     backgroundColor: Colors.accent, borderRadius: 50,
     paddingVertical: 16, alignItems: "center", marginBottom: 12,

@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Dimensions,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
@@ -22,46 +23,63 @@ export function ProductCard({ item }: ProductCardProps) {
   const toggle = useFavoritesStore((s) => s.toggle);
 
   return (
-    <TouchableOpacity
-      style={styles.card}
-      activeOpacity={0.85}
-      onPress={() => router.push(`/product/${item.id}` as any)}
-    >
-      {/* IMAGE */}
+    <View style={styles.card}>
+      {/* IMAGE CAROUSEL */}
       <View style={styles.imageWrapper}>
-        <Image source={{ uri: item.image }} style={styles.image} resizeMode="cover" />
-        {item.badge && (
-          <View style={styles.badge}>
-            <Text style={styles.badgeText}>{item.badge}</Text>
-          </View>
-        )}
-        {!item.inStock && (
-          <View style={styles.outOfStockOverlay}>
-            <Text style={styles.outOfStockText}>Нет в наличии</Text>
-          </View>
-        )}
-        <TouchableOpacity
-          style={styles.wishlistBtn}
-          activeOpacity={0.75}
-          onPress={() => toggle(item.id)}
+        <ScrollView
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          style={{ width: "100%", height: "100%" }}
         >
-          <Text style={[styles.wishlistIcon, isFav && styles.wishlistIconActive]}>
-            {isFav ? "❤️" : "♡"}
-          </Text>
-        </TouchableOpacity>
-      </View>
+          {(item.images?.length ? item.images : [item.image]).map((img, idx) => (
+            <TouchableOpacity
+              key={idx}
+              activeOpacity={0.9}
+              onPress={() => router.push(`/product/${item.id}` as any)}
+              style={{ width: Dimensions.get("window").width - 42 }}
+            >
+              <Image source={{ uri: img }} style={styles.image} resizeMode="cover" />
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+          {item.badge && (
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>{item.badge}</Text>
+            </View>
+          )}
+          {!item.inStock && (
+            <View style={styles.outOfStockOverlay}>
+              <Text style={styles.outOfStockText}>Нет в наличии</Text>
+            </View>
+          )}
+          <TouchableOpacity
+            style={styles.wishlistBtn}
+            activeOpacity={0.75}
+            onPress={() => toggle(item.id)}
+          >
+            <Text style={[styles.wishlistIcon, isFav && styles.wishlistIconActive]}>
+              {isFav ? "❤️" : "♡"}
+            </Text>
+          </TouchableOpacity>
+        </View>
 
       {/* INFO */}
       <View style={styles.info}>
-        <View style={styles.topRow}>
-          <Text style={styles.name} numberOfLines={2}>{item.name}</Text>
-          <Text style={styles.price}>{item.price}</Text>
-        </View>
+        <TouchableOpacity
+          activeOpacity={0.85}
+          onPress={() => router.push(`/product/${item.id}` as any)}
+        >
+          <View style={styles.topRow}>
+            <Text style={styles.name} numberOfLines={2}>{item.name}</Text>
+            <Text style={styles.price}>{item.price}</Text>
+          </View>
 
-        <StarRating rating={item.rating} size={14} />
-        <Text style={styles.reviewCount}>{item.reviews} отзывов</Text>
+          <StarRating rating={item.rating} size={14} />
+          <Text style={styles.reviewCount}>{item.reviews} отзывов</Text>
 
-        <Text style={styles.description} numberOfLines={2}>{item.description}</Text>
+          <Text style={styles.description} numberOfLines={2}>{item.description}</Text>
+        </TouchableOpacity>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.specsRow}>
           {item.specs.map((spec) => (
@@ -81,7 +99,7 @@ export function ProductCard({ item }: ProductCardProps) {
           </Text>
         </TouchableOpacity>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
 

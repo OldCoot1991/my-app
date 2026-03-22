@@ -6,9 +6,10 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
-  SafeAreaView,
   Alert,
+  Dimensions,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
 import { Colors } from "@/constants/Colors";
@@ -69,7 +70,11 @@ export default function ProductScreen() {
       >
         {/* HERO IMAGE */}
         <View style={styles.imageWrapper}>
-          <Image source={{ uri: product.image }} style={styles.productImage} resizeMode="cover" />
+          <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false} style={{ width: '100%', height: '100%' }}>
+            {(product.images?.length ? product.images : [product.image]).map((img, idx) => (
+              <Image key={idx} source={{ uri: img }} style={{ width: Dimensions.get('window').width, height: '100%' }} resizeMode="cover" />
+            ))}
+          </ScrollView>
           {product.badge && (
             <View style={styles.badge}>
               <Text style={styles.badgeText}>{product.badge}</Text>
